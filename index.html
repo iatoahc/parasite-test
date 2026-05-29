@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <title>台大寄生蟲學跑台模擬考系統 - 行動優化版</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <!-- 載入自動生成的圖片與考題資料庫 -->
+    <script src="quiz_db.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 頂部導覽列 (手機優化，精簡不佔空間) -->
+        <header class="app-header no-print">
+            <div class="header-brand" id="brand-home">
+                <div class="logo-icon">🔬</div>
+                <div class="logo-text">
+                    <h2>NTU Parasite</h2>
+                    <span>PRACTICAL SIMULATOR</span>
+                </div>
+            </div>
+            
+            <!-- 行動端主選單切換按鈕 -->
+            <nav class="header-nav">
+                <button class="nav-btn active" id="nav-quiz" data-target="view-setup">
+                    <span class="icon">⏱️</span><span class="lbl">跑台測驗</span>
+                </button>
+                <button class="nav-btn" id="nav-gallery" data-target="view-gallery">
+                    <span class="icon">🎴</span><span class="lbl">3D閃卡圖鑑</span>
+                </button>
+            </nav>
+        </header>
+
+        <!-- 主體內容區 (SPA 視圖切換) -->
+        <main class="app-main">
+            
+            <!-- 1. 設定與開始畫面 (Setup View) -->
+            <section id="view-setup" class="view-section active">
+                <div class="setup-container">
+                    <div class="welcome-card">
+                        <span class="welcome-badge">🔬 NTU COOL 跑台考官級推薦</span>
+                        <h1>寄生蟲學實驗跑台模擬器</h1>
+                        <p>本系統已完全整合您提供的 167 張珍貴顯微鏡與實體標本照片。專為手機滑動與點擊優化，讓您隨時隨地利用零碎時間進行高效率的複習！</p>
+                    </div>
+
+                    <div class="setup-card">
+                        <h3 class="setup-section-title">⚙️ 跑台測驗設定</h3>
+                        
+                        <!-- 類別選擇 -->
+                        <div class="form-group">
+                            <label class="form-label">選擇考試範圍 <span class="label-hint">(可多選)</span></label>
+                            <div class="category-selector-grid">
+                                <button class="suit-selector-btn spade active" data-suit="spade">
+                                    <span class="suit-icon">♠</span>
+                                    <span class="suit-name">線蟲類</span>
+                                </button>
+                                <button class="suit-selector-btn heart active" data-suit="heart">
+                                    <span class="suit-icon">♥</span>
+                                    <span class="suit-name">吸蟲類</span>
+                                </button>
+                                <button class="suit-selector-btn diamond active" data-suit="diamond">
+                                    <span class="suit-icon">♦</span>
+                                    <span class="suit-name">絛蟲類</span>
+                                </button>
+                                <button class="suit-selector-btn club active" data-suit="club">
+                                    <span class="suit-icon">♣</span>
+                                    <span class="suit-name">原蟲類</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 題數選擇 -->
+                        <div class="form-group">
+                            <label for="select-q-count" class="form-label">測驗題數</label>
+                            <div class="select-wrapper">
+                                <select id="select-q-count" class="form-select">
+                                    <option value="10">10 題 (快速熱身)</option>
+                                    <option value="20" selected>20 題 (標準練習)</option>
+                                    <option value="40">40 題 (加強衝刺)</option>
+                                    <option value="all">全部考題 (考驗實力)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 計時模式 -->
+                        <div class="form-group">
+                            <label for="select-time-limit" class="form-label">每題限時</label>
+                            <div class="select-wrapper">
+                                <select id="select-time-limit" class="form-select">
+                                    <option value="15">15 秒 (魔鬼地獄級)</option>
+                                    <option value="30" selected>30 秒 (標準跑台限時)</option>
+                                    <option value="60">60 秒 (熟練分析級)</option>
+                                    <option value="0">無限制 (輕鬆看圖記名)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 開始按鈕 -->
+                        <button class="btn-start-exam" id="btn-start-quiz">
+                            ⚡ 開始進入跑台考場
+                        </button>
+                    </div>
+
+                    <!-- 快捷按鈕區 -->
+                    <div class="quick-links">
+                        <button class="quick-link-btn" id="btn-goto-gallery">
+                            📖 前往 3D 閃卡圖鑑複習全部蟲類 (含生活史)
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 跑台考場畫面 (Exam View) -->
+            <section id="view-exam" class="view-section">
+                <div class="exam-container">
+                    
+                    <!-- 考場狀態與倒數計時 -->
+                    <div class="exam-header-bar">
+                        <div class="q-progress">
+                            問題 <span class="q-number" id="exam-current-idx">1</span> / <span id="exam-total-idx">20</span>
+                        </div>
+                        <div class="countdown-container">
+                            <svg class="countdown-svg" viewBox="0 0 36 36">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle-fill" id="timer-circle" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            </svg>
+                            <div class="timer-text" id="exam-timer-num">30</div>
+                        </div>
+                    </div>
+
+                    <!-- 圖片卡片區 -->
+                    <div class="exam-card">
+                        <div class="exam-image-frame" id="exam-img-container">
+                            <img id="exam-parasite-img" src="" alt="寄生蟲顯微照片">
+                            <div class="stage-tag" id="exam-stage-tag">Egg (蟲卵)</div>
+                            <div class="zoom-indicator">🔍 點擊圖片可放大檢視</div>
+                        </div>
+                    </div>
+
+                    <!-- 作答與答案揭曉區 -->
+                    <div class="exam-action-area">
+                        <!-- 未揭曉答案時 -->
+                        <div class="action-unrevealed" id="action-unrevealed-panel">
+                            <p class="exam-hint">💡 請在腦中回想此寄生蟲的<b>中英文學名</b>...</p>
+                            <button class="btn-reveal-answer" id="btn-show-answer">
+                                👁️ 顯示正確答案
+                            </button>
+                        </div>
+
+                        <!-- 揭曉答案後 -->
+                        <div class="action-revealed hidden" id="action-revealed-panel">
+                            <div class="answer-card">
+                                <div class="ans-header">
+                                    <span class="suit-badge" id="ans-suit-badge">♠</span>
+                                    <h3 class="ans-name-zh" id="ans-name-zh">人蛔蟲</h3>
+                                </div>
+                                <div class="ans-name-en" id="ans-name-en">Ascaris lumbricoides</div>
+                                <div class="ans-stage-label" id="ans-stage-label">型態：Egg (蟲卵)</div>
+                                
+                                <div class="ans-meta-grid">
+                                    <div class="meta-item">
+                                        <span class="meta-lbl">👤 感染器官 / 生活史：</span>
+                                        <span class="meta-val" id="ans-organ">小腸 / 肺臟 (幼蟲移行)</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="meta-lbl">🦠 宿主與病媒：</span>
+                                        <span class="meta-val" id="ans-host">👤 人 (單一宿主，無病媒)</span>
+                                    </div>
+                                </div>
+
+                                <div class="ans-exam-key">
+                                    <div class="key-title">🎯 跑台常考重點：</div>
+                                    <p id="ans-exam-key-text">受精卵凹凸不平的厚蛋白膜（染成金褐色）；未受精卵呈細長卵圓形且內部充滿顆粒。</p>
+                                </div>
+                            </div>
+
+                            <!-- 學習回饋按鈕 (記錄錯題) -->
+                            <div class="feedback-buttons">
+                                <button class="btn-feedback correct" id="btn-correct">
+                                    <span class="icon">✅</span> 記住了
+                                </button>
+                                <button class="btn-feedback incorrect" id="btn-incorrect">
+                                    <span class="icon">❌</span> 答錯了
+                                </button>
+                            </div>
+                            
+                            <!-- 下一題按鈕 -->
+                            <button class="btn-next-question" id="btn-next-q">
+                                下一題 ➡️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 測驗結果與報告畫面 (Result View) -->
+            <section id="view-result" class="view-section">
+                <div class="result-container">
+                    <div class="result-header-card">
+                        <div class="trophy-icon">🏆</div>
+                        <h2>跑台測驗結束！</h2>
+                        <div class="score-circle-container">
+                            <svg class="score-svg" viewBox="0 0 36 36">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle-fill" id="result-score-circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            </svg>
+                            <div class="score-num" id="result-score-text">0</div>
+                            <div class="score-lbl">得分</div>
+                        </div>
+                        <p class="result-comment" id="result-comment-text">再接再厲！多看幾次圖片就能完美掌握喔！</p>
+                        <div class="result-stats">
+                            <div class="stat-box">
+                                <span class="val" id="res-stat-total">20</span>
+                                <span class="lbl">總題數</span>
+                            </div>
+                            <div class="stat-box green">
+                                <span class="val" id="res-stat-correct">0</span>
+                                <span class="lbl">答對</span>
+                            </div>
+                            <div class="stat-box red">
+                                <span class="val" id="res-stat-wrong">20</span>
+                                <span class="lbl">答錯</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 錯題複習區 -->
+                    <div class="wrong-list-card hidden" id="wrong-list-container">
+                        <h3>⚠️ 錯題複習本 <span class="badge" id="wrong-count-badge">0</span></h3>
+                        <p class="section-desc">以下是您本次測驗中答錯的題目，建議在考前加強瀏覽：</p>
+                        <div class="wrong-items-grid" id="wrong-items-list">
+                            <!-- 錯題物件將動態生成 -->
+                        </div>
+                    </div>
+
+                    <!-- 考後行動按鈕 -->
+                    <div class="result-actions">
+                        <button class="btn-action-primary" id="btn-restart-exam">
+                            🔄 重新開始測驗
+                        </button>
+                        <button class="btn-action-secondary hidden" id="btn-retry-wrong">
+                            🔥 挑戰錯題本 (只考剛才答錯的)
+                        </button>
+                        <button class="btn-action-outline" id="btn-result-goto-gallery">
+                            📖 前往圖鑑瀏覽
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 3D 閃卡圖鑑畫面 (Gallery View) -->
+            <section id="view-gallery" class="view-section">
+                <div class="gallery-container">
+                    <div class="gallery-header">
+                        <h2>📖 3D 閃卡學習圖鑑</h2>
+                        <p>點選任一卡片可 3D 翻轉查看其學名、構造與常考重点。適合考前地毯式複習！</p>
+                    </div>
+
+                    <!-- 搜尋與過濾列 -->
+                    <div class="gallery-filter-bar no-print">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="gallery-search" placeholder="搜尋中文學名、英文學名、常考點或器官...">
+                        </div>
+                        
+                        <div class="gallery-filters">
+                            <div class="filter-suit-chips" id="gallery-suit-filters">
+                                <button class="suit-chip active" data-suit="all">全部</button>
+                                <button class="suit-chip" data-suit="spade">♠ 線蟲</button>
+                                <button class="suit-chip" data-suit="heart">♥ 吸蟲</button>
+                                <button class="suit-chip" data-suit="diamond">♦ 絛蟲</button>
+                                <button class="suit-chip" data-suit="club">♣ 原蟲</button>
+                            </div>
+                            
+                            <!-- 是否包含生活史照片開關 -->
+                            <div class="toggle-container">
+                                <span class="toggle-lbl">📖 包含生活史照片 (教學記憶用)</span>
+                                <label class="switch">
+                                    <input type="checkbox" id="toggle-lifecycle" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 卡牌圖鑑 Grid -->
+                    <div class="gallery-grid" id="gallery-cards-grid">
+                        <!-- 動態插入 3D 卡片 -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- 5. 全螢幕高解析度燈箱 (Microscopic Lightbox Modal) -->
+    <div class="lightbox-modal hidden" id="lightbox">
+        <span class="close-btn" id="lightbox-close">&times;</span>
+        <div class="lightbox-content-container">
+            <img class="lightbox-img" id="lightbox-img" src="" alt="放大顯微照">
+            <div class="lightbox-info">
+                <h3 id="lightbox-title-zh">人蛔蟲</h3>
+                <p id="lightbox-title-en">Ascaris lumbricoides</p>
+                <span class="lightbox-stage" id="lightbox-stage">Egg (蟲卵)</span>
+                <p class="lightbox-exam-key" id="lightbox-exam-key">常考重點：凹凸不平粗糙蛋白膜</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

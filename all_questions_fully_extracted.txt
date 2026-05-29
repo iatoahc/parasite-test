@@ -1,0 +1,82 @@
+Q #    | PDF Page | Score  | Answer
+--------------------------------------------------------------------------------
+1      | 2        | 1.25   | 8.Toxocara spp.，請任寫一隻。若有spp的，請任寫一隻。
+2      | 3        | 1.25   | Echinostoma revolutum
+3      | 4        | 1.25   | Angiostrongylus cantonensis
+4      | 5        | 1.25   | Schistosoma mansoni
+5      | 6        | 1.25   | Giardia lamblia
+6      | 7        | 1.25   | Diphyllobothrium latum
+7      | 8        | 1.25   | Spirometra mansoni
+8      | 9        | 1.25   | Entamoeba coli
+9      | 10       | 1.25   | Taenia saginata
+10     | 11       | 1.25   | Schistosoma japonicum
+11     | 12       | 1.25   | Toxocara cati
+12     | 13       | 1.25   | Fasciola hepatica
+13     | 14       | 1.25   | Ancylostoma duodenale
+14     | 15       | 1.25   | Ancylostoma duodenale
+15     | 16       | 1.25   | 假葉目絛蟲
+16     | 17       | 1.25   | Enterobius vermicularis
+17     | 18       | 1.25   | Trypanosoma cruzi
+18     | 19       | 1.25   | Capillaria philippinensis
+19     | 20       | 1.25   | Entamoeba coli
+20     | 21       | 1.25   | Hymenolepis nana
+21     | 22       | 1.25   | Acanthamoeba castellanii
+22     | 23       | 1.25   | 臭蟲
+23     | 24       | 1.25   | Ancylostoma caninum
+24     | 25       | 1.25   | Enterobius vermicularis
+25     | 26       | 1.25   | Clonorchis sinensis
+26     | 27       | 1.25   | Dipylidium caninum
+27     | 28       | 1.25   | Trichinella spiralis
+28     | 29       | 1.25   | Schistosoma haematobium
+29     | 30       | 1.25   | Heterophyes heterophyes
+30     | 31       | 1.25   | 蜱
+31     | 32       | 1.25   | Trichomonas vaginalis
+32     | 32       | 1.25   | Echinostoma revolutum
+33     | 33       | 1.25   | Diphyllobothrium latum
+34     | 34       | 1.25   | Dirofilaria immitis
+35     | 35       | 1.25   | Iodamoeba buetschlii
+36     | 36       | 1.25   | Ascaris lumbricoides
+37     | 36       | 1.25   | Paragonimus westermani
+38     | 37       | 1.25   | Plasmodium malariae
+39     | 38       | 1.25   | Ancylostoma ceylanicum
+40     | 39       | 1.25   | mite
+41     | 40       | 1.25   | Leishmania donovani
+42     | 41       | 1.25   | Fasciolopsis buski
+43     | 42       | 1.25   | Brugia malayi
+44     | 43       | 1.25   | Dracuncules medinensis
+45     | 44       | 1.25   | Hymenolepis diminuta
+46     | 45       | 1.25   | Dipylidium caninum
+47     | 46       | 1.25   | Taenia saginata
+48     | 47       | 1.25   | Trichuris trichiura
+49     | 48       | 1.25   | 陰蝨
+50     | 49       | 1.25   | Paragonimus westermani
+51     | 50       | 1.25   | Necator americanus
+52     | 51       | 1.25   | 跳蚤
+53     | 52       | 1.25   | Fasciolopsis buski
+54     | 53       | 1.25   | Blastocystis hominis
+55     | 54       | 1.25   | Schistosoma japonicum
+56     | 55       | 1.25   | Taenia solium
+57     | 56       | 1.25   | Taenia solium
+58     | 57       | 1.25   | Endolimax nana
+59     | 58       | 1.25   | Raillietina celebensis
+60     | 59       | 1.25   | Trichuris trichiura
+61     | 60       | 0      | Schistosoma haematobium
+62     | 61       | 1.25   | Ancylostoma caninum
+63     | 62       | 1.25   | Dicrocoelium dendriticum
+64     | 63       | 1.25   | Strongyloides stercoralis
+65     | 64       | 1.25   | Angiostrongylus cantonensis
+66     | 65       | 1.25   | Hymenolepis nana
+67     | 66       | 1.25   | Plasmodium falciparum
+68     | 67       | 1.25   | Clonorchis sinensis
+69     | 68       | 1.25   | Entamoeba histolytica
+70     | 69       | 1.25   | Toxoplasma gondii
+71     | 70       | 1.25   | Taenia solium
+72     | 71       | 1.25   | Isospora belli
+73     | 72       | 1.25   | Metagonimus yokogawai
+74     | 73       | 1.25   | Balantidium coli
+75     | 74       | 1.25   | Capillaria hepatica
+76     | 75       | 1.25   | Trichostrongylus orientalis
+77     | 76       | 1.25   | Armillifer agkistrodontis
+78     | 77       | 1.25   | Gnathostoma spinigerum
+79     | 78       | 1.25   | Plasmodium ovale
+80     | 79       | 1.25   | Giardia lamblia
